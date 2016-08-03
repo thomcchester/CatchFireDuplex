@@ -120,3 +120,7 @@ $scope.getDefaults();
 
 
 }]);
+
+
+AppAdmin.controller('gamesController',  ['$scope', '$http', '$window','AdminService',function($scope, $http, $window, AdminService) {
+}]);
