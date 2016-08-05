@@ -9,6 +9,7 @@ AppAdmin.controller('AdminController',  ['$scope', '$http', '$window','AdminServ
 }]);
 
 
+
 AppAdmin.controller('EmailController',  ['$scope', '$http', '$window','AdminService', '$mdDialog',function($scope, $http, $window, AdminService, $mdDialog) {
   'use strict';
 
@@ -121,6 +122,19 @@ $scope.getDefaults();
 
 }]);
 
+AppAdmin.controller('GameController',  ['$scope', '$http', '$window','AdminService',function($scope, $http, $window, AdminService) {
 
-AppAdmin.controller('gamesController',  ['$scope', '$http', '$window','AdminService',function($scope, $http, $window, AdminService) {
+  $scope.getGames= function() {
+    $http.get("/games").then(function(response){
+        $scope.games = response.data[0];
+        AdminService.admin.games = $scope.games;
+    });
+  };
+
+  $scope.getGames();
+
+  $scope.setGames = function(games){
+    AdminService.alterGames(games);
+  };
+
 }]);

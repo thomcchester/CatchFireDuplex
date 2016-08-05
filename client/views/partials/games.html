@@ -1,0 +1,27 @@
+<form name="defaultValuesForm">
+  <div layout="row">
+    <div flex="25">
+      <h5 class="admin1stH5">Variable:</h5>
+    </div>
+    <div flex="25">
+      <h5>Default</h5>
+    </div>
+  </div>
+
+  <div layout="row" class="adminFormDiv odd">
+    <div flex="25">
+      <label class="adminLabel">Monthly Rent</label>
+    </div>
+    <div flex="25">
+      <input type="number" step="any" name="monthlyRentPersonalDef" id="monthlyRentPersonalDef" ng-model="defaultVariables.monthlyRentPersonalDef" required>
+    </div>
+  </div>
+
+
+
+  <div class="adminSubmit">
+    <md-button class="md-raised md-primary" type="submit" value="Submit Default Values" ng-click="defaultValuesForm.$valid && setDefaultValues(defaultVariables)">Submit Default Values</md-button>
+  </div>
+
+
+</form>

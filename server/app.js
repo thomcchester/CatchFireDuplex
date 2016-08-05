@@ -17,6 +17,7 @@ var defaultModel = require('./models/default.js');
 var admin = require('./routes/admin.js');
 var index = require('./routes/index.js');
 var default_value = require('./routes/default.js');
+var games = require('./routes/games.js');
 var register = require('./routes/register.js');
 
 // DATABASE VARS
@@ -25,6 +26,7 @@ var mongoURI =    process.env.MONGODB_URI ||
    "mongodb://localhost/hungergamesdb";
 var mongoDB = mongoose.connect(mongoURI).connection;
 var defaultsExist = null;
+var gamesExist = null;
 
     // DATABASE SETUP
     mongoDB.on('error', function(err){
@@ -38,14 +40,23 @@ var defaultsExist = null;
     var conn = mongoose.createConnection(mongoURI);
     conn.on('open', function(){
     conn.db.listCollections().toArray(function(err, names){
-        if(names.length==0){
-            defaultsExist = false;
+        console.log(names);
+        if(names.length==0) {
+          defaultsExist =false;
+          gamesExist= false;
+        }else if(names.length==1 || names.length==2){
+          gamesExist= false;
+          defaultsExist= true;
         }else{
-            defaultsExist = true;
+          defaults = true;
+          gamesExist = true;
         }
+        console.log(gamesExist)
         conn.close();
+      });
     });
-});
+
+
 /*******************************************************************************************/
 
 // SET PORT
@@ -103,10 +114,18 @@ app.get('/checkDB', function(req, res){
     console.log('defaultsExist =', defaultsExist);
     res.send(defaultsExist);
 });
+
+app.get('checkDBGame', function(req, res){
+  console.log('gamesExist= ', gamesExist);
+  res.send(gamesExist)
+});
+
 app.use('/reg', register);
 app.use('/defaults', default_value);
 app.use('/admin', admin);
+app.use('/games', games)
 app.use('/', index);
+
 
 // LISTENER
 app.listen(app.get('port'), function(){

@@ -25,6 +25,10 @@ App.factory("ClientService", ["$http", function($http){
 
     };
 
+    var initialGameValues={
+      numberOfTeams:2
+    };
+
     var checkIfThereIsData = function(){
         $http.get('/checkDB').then(function(response){
             var bool = response.data;
@@ -37,7 +41,23 @@ App.factory("ClientService", ["$http", function($http){
             }
         });
     };
-    checkIfThereIsData();
+
+    var checkIfThereIsGameData = function(){
+        $http.get('/checkDB').then(function(response){
+          console.log(response.data)
+            var bool = response.data;
+            if(bool === false){
+                $http.post('/games', initialValues).then(function(response){
+                    getDefaults();
+                });
+            }else{
+                getDefaults();
+            }
+        });
+    };
+
+
+    var checkIfThereIsGameData
 
     return {
         alterDefaults: alterDefaults,

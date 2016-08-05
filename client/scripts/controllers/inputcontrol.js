@@ -51,16 +51,6 @@ $scope.$watchCollection('inputData', function(newVal, oldVal){
     console.log("duplexBuy", $scope.inputData.duplexBuy);
 
 
-
-
-
-
-
-
-
-
-
-
     //continous appreciation
     var appreciationFunction = function(howMuchTime,whichKind,whichKindRate){
       var p=principle(whichKind);

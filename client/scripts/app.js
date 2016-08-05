@@ -20,8 +20,12 @@ AppAdmin.config(["$routeProvider", "$locationProvider", function($routeProvider,
             templateUrl: "/views/partials/setVariables.html",
             controller: "SetVariablesController"
         }).
+        when("/games", {
+          templateUrl: "/views/partials/games.html",
+          controller:"GameController"
+        }).
         otherwise({
-            redirectTo: '/emailList'
+            redirectTo: '/games'
         });
 }]);
 
