@@ -63,114 +63,82 @@ $scope.$watchCollection('inputData', function(newVal, oldVal){
       console.log($scope.buyAndRent[1].v, "duplex");
 
 
-      var messageShow = function(){
-          console.log("horse hockey");
-          console.log($scope.buy,$scope.rent,$scope.buyAndRent);
-          if ($scope.buy[1].v < $scope.rent[1] && $scope.buy[1].v < $scope.buyAndRent[1].v) {
-              $scope.topMessage = "save money by buying.";
-          }
-          if ($scope.rent[1].v < $scope.buy[1].v && $scope.rent[1].v < $scope.buyAndRent[1].v) {
-              $scope.topMessage = "save money by renting.";
-
-          }
-          if ($scope.buyAndRent[1].v < $scope.rent[1].v && $scope.buyAndRent[1].v < $scope.buy[1].v) {
-              $scope.topMessage = "earn $" + Math.floor($scope.buyAndRent[1].v)*(-1) + " by investing in a duplex!";
-          }
-      };
-      messageShow();
 
 
-      $scope.buyValues = [];
-      $scope.rentValues = [];
-      $scope.buyAndRentValues = [];
 
-      count=0;
-      var absoluteFunction= function(){
-        for(var i=0;i<newVal.years*12;i++){
-          count++;
-          $scope.buyValues.push(totalBuy(i,newVal.targetPrice,newVal.appreciationRateHome));
-          $scope.buyAndRentValues.push(totDuplex(i,newVal.duplexBuy,newVal.appreciationRate));
-          $scope.rentValues.push(rentFunction(i));
-        };
-      };
+      // var dynamicRows = [];
+      // var populateDynamicRows = function(){
+      //     for (var i = 0; i < newVal.years*12; i++) {
+      //         var newRow = {
+      //                         "c":
+      //                             [
+      //                                 {
+      //                                     "v": i
+      //                                 },
+      //                                 {
+      //                                     "v": $scope.rentValues[i]
+      //                                 },
+      //                                 {
+      //                                     "v": $scope.buyValues[i]
+      //                                 },
+      //                                 {
+      //                                     "v": $scope.buyAndRentValues[i]
+      //                                 }
+      //                             ]
+      //         }
+      //         dynamicRows.push(newRow);
+      //     }
+      // }
+      // populateDynamicRows();
 
-
-      absoluteFunction();
-
-
-      var dynamicRows = [];
-      var populateDynamicRows = function(){
-          for (var i = 0; i < newVal.years*12; i++) {
-              var newRow = {
-                              "c":
-                                  [
-                                      {
-                                          "v": i
-                                      },
-                                      {
-                                          "v": $scope.rentValues[i]
-                                      },
-                                      {
-                                          "v": $scope.buyValues[i]
-                                      },
-                                      {
-                                          "v": $scope.buyAndRentValues[i]
-                                      }
-                                  ]
-              }
-              dynamicRows.push(newRow);
-          }
-      }
-      populateDynamicRows();
-
-      $scope.hiddenChartObject = {
-          "type": "LineChart",
-          "data": {
-              "cols": [
-                  {
-                      "id": "year",
-                      "label": "Years",
-                      "type": "string"
-                  },
-                  {
-                      "id": "buy-line",
-                      "label": "Rent",
-                      "type": "number"
-                  },
-                  {
-                      "id": "rent-line",
-                      "label": "Buy",
-                      "type": "number"
-                  },
-                  {
-                      "id": "buyAndRent-line",
-                      "label": "Duplex",
-                      "type": "number"
-                  }
-              ],
-              "rows": dynamicRows
-          },
-          "options": {
-              "title": "Cost Of Investment Over Time",
-              "isStacked": true,
-              "fill": 20,
-              "displayExactValues": true,
-              "vAxis": {
-                  "title": "Return"
-
-              },
-              "hAxis": {
-                  "title": "Months"
-              },
-              "animation":{
-                  duration: 300,
-                  easing: 'out',
-              },
-              "colors":['lightblue', 'blue', 'rgb(255,64,129)']
-
-          },
-          "formatters": {}
-      }
+      // // $scope.hiddenChartObject = {
+      //     "type": "LineChart",
+      //     "data": {
+      //         "cols": [
+      //             {
+      //                 "id": "year",
+      //                 "label": "Years",
+      //                 "type": "string"
+      //             },
+      //             {
+      //                 "id": "buy-line",
+      //                 "label": "Rent",
+      //                 "type": "number"
+      //             },
+      //             {
+      //                 "id": "rent-line",
+      //                 "label": "Buy",
+      //                 "type": "number"
+      //             },
+      //             {
+      //                 "id": "buyAndRent-line",
+      //                 "label": "Duplex",
+      //                 "type": "number"
+      //             }
+      //         ],
+      //         "rows": dynamicRows
+      //     },
+      //     "options": {
+      //         "title": "Cost Of Investment Over Time",
+      //         "isStacked": true,
+      //         "fill": 20,
+      //         "displayExactValues": true,
+      //         "vAxis": {
+      //             "title": "Return"
+      //
+      //         },
+      //         "hAxis": {
+      //             "title": "Months"
+      //         },
+      //         "animation":{
+      //             duration: 300,
+      //             easing: 'out',
+      //         },
+      //         "colors":['lightblue', 'blue', 'rgb(255,64,129)']
+      //
+      //     },
+      //     "formatters": {}
+      // // }
 
 
 });
